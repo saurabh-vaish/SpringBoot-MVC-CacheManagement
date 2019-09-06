@@ -1,0 +1,47 @@
+Deploy Tomcat To Server 
+
+1.  Add Packaging to war 
+	<!-- packaging to WAR -->
+    	<packaging>war</packaging>
+
+
+2. Add Tomcat starter and scope change to provide 
+    
+	<!-- Instruct spring boot not to use the inbuilt Tomcat server -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+3. Change Build Name of Final War 
+	
+	<build>
+		<finalName>SpringBootMvcCache</finalName>
+	</build>
+
+4. In Starter class extend SpringBootServletInitializer  and override configure method 
+
+@SpringBootApplication
+public class SpringBootApplication extends SpringBootServletInitializer {
+
+	
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+		 return builder.sources(SpringBootApplication.class);
+	}
+	
+	public static void main(String[] args) {
+		SpringApplication.run(SpringBootApplication.class, args);
+	}
+
+}
+
+
+5. Maven goal ==  clean , then package 
+
+6. copy war file go to tomcat/webapp  folder and paste file 
+
+7. restart server it will auto deploy
+
+8. click on app name in manager app in tomcat , give class and method level path
